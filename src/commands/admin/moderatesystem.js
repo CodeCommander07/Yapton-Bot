@@ -141,7 +141,9 @@ module.exports = {
                 .setTitle("`⛔` User banned")
                 .setAuthor({
                   name: suspiciousUser.user.username,
-                  iconURL: suspiciousUser.user.displayAvatarURL({ dynamic: true }),
+                  iconURL: suspiciousUser.user.displayAvatarURL({
+                    dynamic: true,
+                  }),
                 })
                 .addFields(
                   {

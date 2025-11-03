@@ -1,51 +1,65 @@
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+const { REST, Routes } = require("discord.js");
 const fs = require("fs");
-const logger = require("../logger");
+const logger = require("../logger"); // optional, keep your logging
+require("dotenv").config();
 
-const clientId = "1278725795195519079";
-const guildId = "YOUR GUILD ID";
+const clientId = "1278725795195519079"; // your bot’s Application ID
+const guildId = process.env.GUILD_ID || "YOUR_GUILD_ID"; // optional for per-guild
 
 module.exports = (client) => {
-  client.handleCommands = async (commandFolders, path) => {
+  client.handleCommands = async (commandFolders, basePath) => {
+    client.commands = new Map();
     client.commandArray = [];
-    for (folder of commandFolders) {
+
+    for (const folder of commandFolders) {
+      const commandsPath = `${basePath}/${folder}`;
       const commandFiles = fs
-        .readdirSync(`${path}/${folder}`)
+        .readdirSync(commandsPath)
         .filter((file) => file.endsWith(".js"));
+
       for (const file of commandFiles) {
         const command = require(`../commands/${folder}/${file}`);
+
+        if (!command?.data) {
+          logger?.warn?.("commands", `⚠️ Skipped ${file} — missing "data".`);
+          continue;
+        }
+
         client.commands.set(command.data.name, command);
         client.commandArray.push(command.data.toJSON());
+        logger?.warn?.(
+          "commands",
+          `✅ Loaded command: /${command.data.name}`
+        );
       }
     }
 
-    const rest = new REST({
-      version: "9",
-    }).setToken(process.env.token);
+    const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-    (async () => {
-      try {
-        await console.clear();
-        logger.warn(
-          "commands",
-          `Started registering ${client.commands.size} application (/) commands.`
-        );
+    try {
+      console.clear();
+      logger?.warn?.(
+        "commands",
+        `🔄 Registering ${client.commands.size} slash commands...`
+      );
 
-        await rest.put(Routes.applicationCommands(clientId), {
-          body: client.commandArray,
-        });
-        logger.warn(
-          "commands",
-          `Successfully registered & started pushing ${client.commands.size} application (/) commands.`
-        );
-        logger.warn(
-          "commands",
-          `Successfully registered & pushed ${client.commands.size} application (/) commands.`
-        );
-      } catch (error) {
-        logger.error("commands", `${error}`);
-      }
-    })();
+      // Register globally (takes up to 1h to propagate)
+      await rest.put(Routes.applicationCommands(clientId), {
+        body: client.commandArray,
+      });
+
+      // ⚡ For instant testing, register per-guild (comment out if not needed)
+      // await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+      //   body: client.commandArray,
+      // });
+
+      logger?.warn?.(
+        "commands",
+        `✅ Successfully registered ${client.commands.size} slash commands.`
+      );
+    } catch (err) {
+      logger?.error?.("commands", err);
+      console.error(err);
+    }
   };
 };

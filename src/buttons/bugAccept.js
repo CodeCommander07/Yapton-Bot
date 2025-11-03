@@ -19,6 +19,7 @@ module.exports = {
     const embed = interaction.message.embeds[0];
 
     embed.fields[1].value = `\`Accepted\` - ${interaction.user}`;
+    console.log(embed)
     const exampleEmbed = EmbedBuilder.from(embed)
       .setColor(mConfig.embedColorSuccess)
       .setTitle("Bug Report Accepted");
