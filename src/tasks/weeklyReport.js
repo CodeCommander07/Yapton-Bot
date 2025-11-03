@@ -142,9 +142,9 @@ async function generateWeeklyReport() {
   const recipients = ["flat@flatstudios.net", "admin@flatstudios.net", "codecmdr.rblx@gmail.com"]
 
   if (recipients.length) {
-    const toList = recipients.map(r => r.email).filter(Boolean);
-    const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    const downloadUrl = `${baseUrl}/api/reports/file/${reportDoc._id}`;
+    const toList = recipients.map(r => r).filter(Boolean);
+    const downloadUrl = `https://yapton.vercel.app/api/reports/file/${reportDoc._id}`;
+    const viewUrl = `https://yapton.vercel.app/hub+/activity/reports/${reportDoc._id}`;
 
     const html = `
       <div style="font-family:Arial,sans-serif">
@@ -154,6 +154,9 @@ async function generateWeeklyReport() {
           <a href="${downloadUrl}" style="display:inline-block;background:#10b981;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none">
             Download Report
           </a>
+                    <a href="${viewUrl}" style="display:inline-block;background:#10b981;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none">
+            View Report
+          </a>
         </p>
         <p>— Flat Studios Automated Reports</p>
       </div>
@@ -162,7 +165,7 @@ async function generateWeeklyReport() {
     try {
       await mailer.sendMail({
         from: process.env.MAIL_USER,
-        to: toList.join(", "),
+        to: toList,
         subject: `Weekly Activity Report – ${labelFromLong} → ${labelToLong}`,
         html,
         attachments: [
