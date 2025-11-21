@@ -11,8 +11,7 @@ const axios = require("axios");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("reload")
-    .setDescription("Special command. If you know you know what its for")
-    .toJSON(),
+    .setDescription("Special command. If you know you know what its for"),
   userPermissions: [PermissionFlagsBits.SendMessages],
   botPermissions: [PermissionFlagsBits.SendMessages],
   devOnly: true,
