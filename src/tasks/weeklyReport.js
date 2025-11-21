@@ -188,8 +188,8 @@ async function generateWeeklyReport() {
 }
 
 // 🕒 Run every Sunday at 00:00 (London)
-// cron.schedule('0 0 * * 0', generateWeeklyReport, { timezone: TIMEZONE });
-cron.schedule('* * * * *', generateWeeklyReport, { timezone: TIMEZONE });
+cron.schedule('0 20 * * 0', generateWeeklyReport, { timezone: TIMEZONE });
+// cron.schedule('* * * * *', generateWeeklyReport, { timezone: TIMEZONE });
 console.log('📅 [WeeklyReport] Scheduler loaded (runs every Sunday 00:00 London)');
 
 module.exports = generateWeeklyReport;
