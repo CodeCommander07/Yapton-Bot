@@ -164,7 +164,7 @@ async function generateWeeklyReport() {
 
     try {
       await mailer.sendMail({
-        from: process.env.MAIL_USER,
+        from: `"Weekly Activity" <${process.env.MAIL_USER}>`,
         to: toList,
         subject: `Weekly Activity Report – ${labelFromLong} → ${labelToLong}`,
         html,
