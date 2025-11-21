@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const { GridFSBucket } = require('mongodb');
 const { DateTime } = require('luxon');
 const nodemailer = require('nodemailer');
-const ActivityLog = require('../schemas/ActivityLog.js');
-const User = require('../schemas/User.js');
-const WeeklyReport = require('../schemas/WeeklyReport.js');
+const ActivityLog = require('../Schemas/ActivityLog.js');
+const User = require('../Schemas/User.js');
+const WeeklyReport = require('../Schemas/WeeklyReport.js');
 
 const TIMEZONE = 'Europe/London';
 
