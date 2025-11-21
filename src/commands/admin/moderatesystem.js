@@ -4,7 +4,7 @@ const {
   ChannelType,
   EmbedBuilder,
 } = require("discord.js");
-const moderationSchema = require("../../schemas/moderation");
+const moderationSchema = require("../../Schemas/moderation");
 const mConfig = require("../../messageConfig.json");
 const suspiciousUsers = require("../../suspiciousUsers.json"); // Level 3
 

@@ -1,6 +1,6 @@
 require("colors");
 const { ActivityType, Client } = require("discord.js");
-const botStatuses = require("../../schemas/botPresence");
+const botStatuses = require("../../Schemas/botPresence");
 
 module.exports =
   /**

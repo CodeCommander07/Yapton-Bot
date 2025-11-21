@@ -8,7 +8,7 @@ const {
   ButtonStyle,
 } = require("discord.js");
 const mConfig = require("../messageConfig.json");
-const moderationSchema = require("../schemas/moderation");
+const moderationSchema = require("../Schemas/moderation");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()

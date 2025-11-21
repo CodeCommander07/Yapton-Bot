@@ -3,8 +3,8 @@ const {
   EmbedBuilder,
   PermissionFlagsBits,
 } = require("discord.js");
-const WarningModel = require("../../schemas/warningSchema");
-const ModerationSystem = require("../../schemas/moderation");
+const WarningModel = require("../../Schemas/warningSchema");
+const ModerationSystem = require("../../Schemas/moderation");
 const ButtonPagination = require("../../utils/buttonPagination");
 const mConfig = require("../../messageConfig.json");
 

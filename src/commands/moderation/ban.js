@@ -3,7 +3,7 @@ const {
   PermissionFlagsBits,
   EmbedBuilder,
 } = require("discord.js");
-const moderationSchema = require("../../schemas/moderation");
+const moderationSchema = require("../../Schemas/moderation");
 const mConfig = require("../../messageConfig.json");
 
 module.exports = {
