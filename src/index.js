@@ -7,7 +7,7 @@ const { errorHandler } = require("./utils/errorHandler");
 
 var cron = require("node-cron");
 
-const generateWeeklyReport = require("./tasks/weeklyReport")
+require("./tasks/weeklyReport")
 
 const client = new Client({
   intents: [
@@ -25,6 +25,5 @@ const client = new Client({
 handleCommands(client)
 eventHandler(client);
 errorHandler(client);
-cron.schedule('0 0 * * 0', generateWeeklyReport);
 
 client.login(process.env.TOKEN);
