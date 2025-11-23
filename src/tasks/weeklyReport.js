@@ -143,8 +143,8 @@ async function generateWeeklyReport() {
 
   if (recipients.length) {
     const toList = recipients.map(r => r).filter(Boolean);
-    const downloadUrl = `https://yapton.vercel.app/api/reports/file/${reportDoc._id}`;
-    const viewUrl = `https://yapton.vercel.app/hub+/activity/reports/${reportDoc._id}`;
+    const downloadUrl = `https://yapton.flatstudios.net/api/reports/file/${reportDoc._id}`;
+    const viewUrl = `https://yapton.flatstudios.net/hub+/activity/reports/${reportDoc._id}`;
 
     const html = `
       <div style="font-family:Arial,sans-serif">
